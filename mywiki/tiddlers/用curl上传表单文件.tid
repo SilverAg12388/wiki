@@ -1,0 +1,21 @@
+created: 20180509052722495
+creator: shaoding
+modified: 20180509061003996
+modifier: shaoding
+tags: Issue
+title: 用curl上传表单文件
+type: text/vnd.tiddlywiki
+
+[[https://medium.com/@petehouston/upload-files-with-curl-93064dcccc76]]
+
+上传单个文件
+
+```
+$ curl -F ‘data=@path/to/local/file’ UPLOAD_ADDRESS
+```
+
+上传多个文件
+
+```
+$ curl -F 'fileX=@/path/to/fileX' -F 'fileY=@/path/to/fileY' ... http://localhost/upload
+```

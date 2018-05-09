@@ -1,0 +1,41 @@
+created: 20180509084152721
+creator: anonymous
+modified: 20180509090240910
+modifier: shaoding
+tags: Issue
+title: NodeJS 文件(夹)压缩/解压(zip/unzip)
+type: text/vnd.tiddlywiki
+
+[[https://www.cnblogs.com/IT-OnLine/p/6489245.html]]
+
+我使用的比较靠谱的，也比较简单，其中archiver很强大，支持zip格式tar格式，只需要提供路径就可以压缩已存在的文件夹。
+
+压缩：
+
+```
+var fs = require('fs');
+var archiver = require('archiver');
+
+var output = fs.createWriteStream('archiver-unzip.zip');
+var archive = archiver('zip');
+
+archive.on('error', function(err){
+    throw err;
+});
+
+archive.pipe(output);
+archive.bulk([
+    { src: ['archiver/**']}
+]);
+archive.finalize();
+```
+
+解压：
+
+```
+var fs = require("fs");
+var unzip = require("unzip");
+
+fs.createReadStream('archiver-unzip.zip').pipe(unzip.Extract({ path: 'unarchive' }));
+```
+

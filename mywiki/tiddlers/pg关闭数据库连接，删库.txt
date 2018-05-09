@@ -1,0 +1,10 @@
+PostgreSQL 中 有时候想删除数据库（drop database swiftliveqaapi;），发现提示“ERROR:  database "xxxxxx" is being accessed by other users DETAIL:  There are 30 other sessions using the database.”
+
+       意思是 有其他用户在连接数据库，不能删除。
+
+解决方法：
+
+用psql 登录进入， 执行语句：
+
+ SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname='数据库名' AND pid<>pg_backend_pid(); 
+然后就可以删除数据库了。

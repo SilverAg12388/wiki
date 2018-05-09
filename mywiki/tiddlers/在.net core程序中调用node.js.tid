@@ -1,0 +1,80 @@
+created: 20180509082611046
+creator: anonymous
+modified: 20180509090348971
+modifier: shaoding
+tags: Issue
+title: 在.net core程序中调用node.js
+type: text/vnd.tiddlywiki
+
+[[https://social.technet.microsoft.com/wiki/contents/articles/37972.execute-javascript-code-from-asp-net-core-back-end-using-nodeservices.aspx]]
+
+1.添加NodeService
+
+```
+public void ConfigureServices(IServiceCollection services)
+{
+    // Add framework services.
+    services.AddMvc();
+    services.AddNodeServices();
+}
+```
+
+2.调用单个函数
+
+lodash.js
+
+```
+var _ = require('lodash');
+ 
+module.exports = {
+    sortBy: function (callback, data, option) {
+        var result = _.sortBy(data, [option]);
+        callback(null, result);
+    }
+};
+```
+
+```
+public class User
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+ 
+[Produces("application/json")]
+[Route("api/Users")]
+public class UsersController : Controller
+{
+    [HttpGet("GetSortedUsers")]
+    public async Task<IActionResult> SortedUsers([FromServices] INodeServices nodeServices, string sortBy)
+    {
+        var data = new User[]
+        {
+            new User {Name = "fred", Age = 48},
+            new User {Name = "barney", Age = 36},
+            new User {Name = "fred", Age = 40},
+            new User {Name = "barney", Age = 34}
+        };
+ 
+        var sortedUsers = await nodeServices.InvokeExportAsync<User[]>("./Node/lodash", "sortBy", data, sortBy);
+ 
+        return Ok(sortedUsers);
+    }
+}
+```
+
+
+3.调用整个文件
+
+addNumbers.js
+
+```
+module.exports = function (callback, first, second) {
+    var result = first + second;
+    callback(/* error */ null, result);
+};
+```
+
+```
+var result = await nodeServices.InvokeAsync<int>("./addNumbers", 1, 2);
+```

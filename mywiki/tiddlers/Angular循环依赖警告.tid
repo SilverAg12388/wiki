@@ -1,0 +1,21 @@
+created: 20180509075636501
+creator: shaoding
+modified: 20180509075836924
+modifier: shaoding
+tags: Issue
+title: Angular循环依赖警告
+type: text/vnd.tiddlywiki
+
+[[https://github.com/angular/angular-cli/issues/7705]]
+
+you should add showCircularDependencies as following to your .angular-cli.json:
+
+```
+....
+  "defaults": {
+    ....
+    "build": {
+      "showCircularDependencies": false
+    }
+  }
+```

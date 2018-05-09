@@ -1,0 +1,23 @@
+created: 20180509063410199
+creator: shaoding
+modified: 20180509065032749
+modifier: shaoding
+tags: Issue
+title: EF Core迁移
+type: text/vnd.tiddlywiki
+
+* 删除数据库
+```
+dotnet ef database drop
+```
+
+* 首次迁移
+```
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+* 删除迁移
+```
+dotnet ef migrations remove
+```

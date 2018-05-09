@@ -1,0 +1,39 @@
+created: 20180509062722474
+creator: shaoding
+modified: 20180509063138197
+modifier: shaoding
+tags: Issue
+title: Angular ngfor循环object
+type: text/vnd.tiddlywiki
+
+[[http://www.cnblogs.com/huangenai/p/6888666.html]]
+
+```
+datas: Array<any> = [
+    { num: 1, date: "2017-04-12", sellNum: "1231234", sellMpney: "1233", returnNum: "24" },
+    { num: 1, date: "2017-04-12", sellNum: "1231234", sellMpney: "1233", returnNum: "24" },
+    { num: 1, date: "2017-04-12", sellNum: "1231234", sellMpney: "1233", returnNum: "24" },
+    { num: 1, date: "2017-04-12", sellNum: "1231234", sellMpney: "1233", returnNum: "24" },
+    { num: 1, date: "2017-04-12", sellNum: "1231234", sellMpney: "1233", returnNum: "24" },
+    { num: 1, date: "2017-04-12", sellNum: "1231234", sellMpney: "1233", returnNum: "24" },
+    { num: 1, date: "2017-04-12", sellNum: "1231234", sellMpney: "1233", returnNum: "24" },
+  ];
+
+getKeys(item) {
+    return Object.keys(item);
+}
+```
+
+```
+<ion-header>
+  <ion-navbar>
+    <ion-title>关于ngfor 嵌套循环</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngFor="let item of datas">
+    <ion-col *ngFor="let key of getKeys(item)"> {{ item[key] }}</ion-col>
+  </ion-row>
+</ion-content>
+```

@@ -1,0 +1,11 @@
+created: 20180509083456772
+creator: anonymous
+modified: 20180509090250658
+modifier: shaoding
+tags: Issue
+title: Docker多阶段build缓存none镜像
+type: text/vnd.tiddlywiki
+
+[[https://github.com/moby/moby/issues/34151]]
+
+ agree that this behavior should be controlled by the user. For now, I'm using `docker image prune -f` after my `docker build -t app . `command to cleanup those intermediate images.

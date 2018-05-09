@@ -1,0 +1,11 @@
+created: 20180509085000960
+creator: anonymous
+modified: 20180509090236004
+modifier: shaoding
+tags: Issue
+title: Minikube设置内存大小
+type: text/vnd.tiddlywiki
+
+[[https://github.com/kubernetes/minikube/issues/587]]
+
+minikube default memory can be increased by `minikube config set memory <memory>`
