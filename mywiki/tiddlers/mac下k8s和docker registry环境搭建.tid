@@ -1,0 +1,64 @@
+created: 20180514021047364
+creator: shaoding
+modified: 20180514021544260
+modifier: shaoding
+tags: 工作
+title: mac下k8s和docker registry环境搭建
+type: text/vnd.tiddlywiki
+
+1.K8S写证书
+
+```
+minikube ssh
+
+sudo vi /etc/ssl/certs/ca-certificates.crt
+
+sudo systemctl restart docker
+
+free -m
+```
+
+2.K8S重启
+
+```
+minikube stop
+
+minikube delete
+
+rm -rf ~/.minikube
+
+minikube config set memory 3072
+
+minikube start --registry-mirror=https://registry.docker-cn.com
+```
+
+3.K8S api代理
+
+```
+kubectl proxy --address='0.0.0.0'  --accept-hosts='^*$' --port=8000
+```
+
+
+
+4.build镜像
+
+```
+bash ./pre-build.sh latest
+
+bash ./build.sh latest
+```
+
+
+5.启动镜像
+
+```
+docker run -it -d -v $(pwd)/dist:/wwwroot -p 127.0.0.1:5000:5000/tcp 3c22ecc37c39
+
+docker exec -it fdc5acc6efc1 bash
+```
+
+6.docker compose转换为k8s部署文件
+
+a.kompose convert -f docker-compose.yml -o bank.yaml
+
+b.给deployment加上selector
