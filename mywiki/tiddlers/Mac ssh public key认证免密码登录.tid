@@ -1,0 +1,51 @@
+created: 20180518100027373
+creator: shaoding
+modified: 20180518100434107
+modifier: shaoding
+tags: Issue
+title: Mac ssh public key认证免密码登录
+type: text/vnd.tiddlywiki
+
+[[https://www.magentonotes.com/mac-ssh-public-key-login.html]]
+
+ssh 登录可以使用公钥认证(ssh public key authentication)。
+
+将客户端机器的ssh public key添加到服务器的 ~/.ssh/authorized_keys 文件中，可实现ssh的免密码登录。
+
+这样做使得登录服务器更加安全和快捷。
+
+* 客户端生成公钥和私钥
+生成一个名为test的公钥和私钥对，密码留空不输入。
+
+```
+cd ~/.ssh
+ssh-keygen -t rsa
+cat test.pub
+```
+可以看到两个密钥文件：id_rsa（私钥） id_rsa.pub（公钥）,复制公钥id_rsa.pub内容
+
+* 配置公钥到服务器
+
+```
+mkdir ~/.ssh
+vi ~/.ssh/authorized_keys
+```
+
+将公钥内容添加到服务器的~/.ssh/authorized_keys 文件中.
+
+* 无法登录一般的原因
+
+客户端的私钥和公钥文件位置必须位于 ~/.ssh 下。
+
+确保双方 ~/.ssh 目录，父目录，公钥私钥，authorized_keys 文件的权限对当前用户至少要有执行权限，对其他用户最多只能有执行权限。
+
+注意git登录，要求对公钥和私钥以及config文件，其他用户不能有任何权限。
+
+确保服务器端 ~/.ssh/authorized_keys 文件名没有错误
+
+* 文件和目录权限设置
+
+```
+chmod 700 -R ~/.ssh
+chmod 600 ~/.ssh/authorized_keys 
+```

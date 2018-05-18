@@ -1,0 +1,40 @@
+created: 20180518094545729
+creator: shaoding
+modified: 20180518095144527
+modifier: shaoding
+tags: Issue
+title: Docker中使用代理下载镜像
+type: text/vnd.tiddlywiki
+
+[[https://stackoverflow.com/questions/23111631/cannot-download-docker-images-behind-a-proxy]]
+
+windows和linux环境下在docker界面中设置代理地址
+
+linux环境下执行以下命令
+
+```
+sudo mkdir /etc/systemd/system/docker.service.d
+
+sudo touch /etc/systemd/system/docker.service.d/http-proxy.conf
+
+sudo vi /etc/systemd/system/docker.service.d/http-proxy.conf
+```
+
+添加以下内容
+
+```
+[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80/"
+Environment="HTTP_PROXY=http://proxy.example.com:80/"
+Environment="NO_PROXY=localhost,127.0.0.0/8,docker-registry.somecorporation.com"
+```
+
+执行以下命令
+
+```
+sudo systemctl daemon-reload
+
+sudo systemctl show --property Environment docker
+
+sudo systemctl restart docker
+```

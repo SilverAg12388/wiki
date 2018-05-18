@@ -1,0 +1,54 @@
+created: 20180518095409696
+creator: shaoding
+modified: 20180518095856210
+modifier: shaoding
+tags: Issue
+title: Mac下使用scp命令和Linux之间传输文件
+type: text/vnd.tiddlywiki
+
+[[https://blog.csdn.net/aa294194253/article/details/50054723]]
+
+不同的Linux之间copy文件常用有3种方法：
+
+第一种就是ftp，也就是其中一台Linux安装ftp Server，这样可以另外一台使用ftp的client程序来进行文件的copy。
+
+第二种方法就是采用samba服务，类似Windows文件copy 的方式来操作，比较简洁方便。
+
+第三种就是利用scp命令来进行文件复制。
+
+以下几种情况：
+
+1、从本地将文件传输到服务器
+scp【本地文件的路径】【服务器用户名】@【服务器地址】：【服务器上存放文件的路径】
+
+
+
+scp /Users/mac_pc/Desktop/test.png root@192.168.1.1:/root
+
+
+
+2、从本地将文件夹传输到服务器
+scp -r【本地文件的路径】【服务器用户名】@【服务器地址】：【服务器上存放文件的路径】
+
+
+
+scp -r /Users/mac_pc/Desktop/test root@192.168.1.1:/root
+
+
+
+3、将服务器上的文件传输到本地
+scp 【服务器用户名】@【服务器地址】：【服务器上存放文件的路径】【本地文件的路径】
+
+
+
+scp root@192.168.1.1:/data/wwwroot/default/111.png /Users/mac_pc/Desktop
+
+
+
+4、将服务器上的文件夹传输到本地
+scp -r 【服务器用户名】@【服务器地址】：【服务器上存放文件的路径】【本地文件的路径】
+
+
+
+scp -r root@192.168.1.1:/data/wwwroot/default/test /Users/mac_pc/Desktop
+

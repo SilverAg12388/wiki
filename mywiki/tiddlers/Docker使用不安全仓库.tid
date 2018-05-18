@@ -1,0 +1,21 @@
+created: 20180518092925816
+creator: shaoding
+modified: 20180518093423635
+modifier: shaoding
+tags: Issue
+title: Docker使用不安全仓库
+type: text/vnd.tiddlywiki
+
+[[https://github.com/moby/moby/issues/28321]]
+
+windows和mac下在docker设置界面的Daemon选项中添加 `"insecure-registries": ["10.0.0.15:5000"]`, 重启docker
+
+Linux下使用以下命令
+
+Try adding --insecure-registry option to daemon in /etc/systemd/system/docker.service.d/docker.conf file
+
+```
+sudo systemctl daemon-reload
+
+sudo service docker restart
+```

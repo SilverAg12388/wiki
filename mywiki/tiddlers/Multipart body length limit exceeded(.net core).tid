@@ -1,0 +1,20 @@
+created: 20180518094136102
+creator: shaoding
+modified: 20180518094324020
+modifier: shaoding
+tags: Issue
+title: Multipart body length limit exceeded(.net core)
+type: text/vnd.tiddlywiki
+
+[[https://stackoverflow.com/questions/40364226/multipart-body-length-limit-exceeded-exception]]
+
+I found the solution for this problem after reading some posts in GitHub. Conclusion is that they have to be set in the Startup class. For example:
+
+public void ConfigureServices(IServiceCollection services)
+{
+        services.AddMvc();
+        services.Configure<FormOptions>(x => {
+            x.ValueLengthLimit = int.MaxValue;
+            x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
+        })
+ }

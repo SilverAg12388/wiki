@@ -1,6 +1,6 @@
 created: 20180514021047364
 creator: shaoding
-modified: 20180514021544260
+modified: 20180514100141444
 modifier: shaoding
 tags: 工作
 title: mac下k8s和docker registry环境搭建
@@ -35,7 +35,7 @@ minikube start --registry-mirror=https://registry.docker-cn.com
 3.K8S api代理
 
 ```
-kubectl proxy --address='0.0.0.0'  --accept-hosts='^*$' --port=8000
+kubectl proxy --disable-filter=true --address=0.0.0.0  --accept-hosts='^*$' --port=8000
 ```
 
 
