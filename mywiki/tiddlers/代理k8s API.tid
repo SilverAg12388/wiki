@@ -1,0 +1,13 @@
+created: 20180525095254968
+creator: shaoding
+modified: 20180525095506451
+modifier: shaoding
+tags: K8S
+title: 代理k8s API
+type: text/vnd.tiddlywiki
+
+[[https://thenewstack.io/taking-kubernetes-api-spin/]]
+
+```
+kubectl proxy --address=0.0.0.0  --accept-hosts='^*$' --port=8000
+```

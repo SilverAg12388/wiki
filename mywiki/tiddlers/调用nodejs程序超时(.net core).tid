@@ -1,0 +1,16 @@
+created: 20180525095650467
+creator: shaoding
+modified: 20180525100352249
+modifier: shaoding
+tags: [[Asp.Net Core]]
+title: 调用nodejs程序超时(.net core)
+type: text/vnd.tiddlywiki
+
+[[https://stackoverflow.com/questions/50376225/getting-node-invocation-timed-out-error-when-invoking-js-file-using-microsoft-as]]
+
+```
+services.AddNodeServices(options =>
+{
+    options.InvocationTimeoutMilliseconds = (int)TimeSpan.FromMinutes(5).TotalMilliseconds;
+});
+```
