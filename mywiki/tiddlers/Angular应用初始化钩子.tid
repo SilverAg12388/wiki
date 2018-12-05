@@ -1,0 +1,67 @@
+created: 20181205134926181
+creator: shaoding
+modified: 20181205135404443
+modifier: shaoding
+tags: Angular
+title: Angular应用初始化钩子
+type: text/vnd.tiddlywiki
+
+https://dormoshe.io/articles/hook-into-angular-initialization-process-8
+
+在AppModule中声明APP_INITIALIZER
+
+```
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+
+@NgModule({
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: onAppInit1,
+      multi: true,
+      deps: [/* your dependencies */]
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: onAppInit2,
+      multi: true,
+      deps: [/* your dependencies */]
+    }
+  ]
+})
+export class AppModule { }
+```
+
+```
+export function onAppInit1(/* dependencies */): () => Promise<any> {
+  return (): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      console.log(`${getTimeString()} onAppInit1:: inside promise`);
+
+      setTimeout(() => {
+        console.log(`${getTimeString()} onAppInit1:: inside setTimeout`);
+        // doing something
+        // ...
+
+        resolve();
+      }, 3000);
+    });
+  };
+}
+
+export function onAppInit2(/* dependencies */): () => Promise<any> {
+  return (): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      console.log(`${getTimeString()} onAppInit2:: inside promise`);
+
+      setTimeout(() => {
+        console.log(`${getTimeString()} onAppInit2:: inside setTimeout`);
+        // doing something
+        // ...
+        
+        resolve();
+      }, 5000);
+    });
+  };
+}
+```

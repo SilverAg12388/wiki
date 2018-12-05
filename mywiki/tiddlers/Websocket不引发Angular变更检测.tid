@@ -1,0 +1,25 @@
+created: 20181205140246258
+creator: shaoding
+modified: 20181205140355430
+modifier: shaoding
+tags: Angular
+title: Websocket不引发Angular变更检测
+type: text/vnd.tiddlywiki
+
+https://github.com/angular/angular/issues/5046
+
+```
+constructor(private zone: NgZone)  {}
+
+public connect(options: any) {
+    // custom code
+   [...]
+
+    // socket event
+    this.mainSocket.on('connect_error', (error: any) => {
+        this.zone.run(() => {
+            this.onConnectError(error);
+        });     
+    });
+}
+```

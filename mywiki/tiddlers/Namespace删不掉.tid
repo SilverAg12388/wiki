@@ -1,0 +1,15 @@
+created: 20181205141302579
+creator: shaoding
+modified: 20181205141432368
+modifier: shaoding
+tags: K8S
+title: Namespace删不掉
+type: text/vnd.tiddlywiki
+
+https://github.com/kubernetes/kubernetes/issues/19317
+
+强制删除命名空间下的容器
+
+```
+kubectl -n some_namespace delete pod --all --grace-period=0 --force
+```
